@@ -1,0 +1,39 @@
+					
+					<div id="auswahl1">
+						
+							<div><h1>Search</h1></div>
+							<div>							
+							<%= link_to 'alle Veranstaltungen',{:controller => 'searches', :action => 'list'},{:class =>'weiter'}%>
+							</div>
+							<hr style="width:200px;"></hr>
+							
+							<% form_tag :action => 'listing', :id => @category_id do %>
+								<div class="weiter">Kategorie</a></div>
+								<%= select("id", @category, Category.find(:all).collect {|p| [ p.name, p.id ] }) %>
+								 <%= submit_tag 'List by Category'%> 
+							 <% end %>
+							
+							<div class="weiter">Umkreissuche</a></div>
+							 <% form_tag :action => 'results', :id => @event do %>
+							 	<%= select("id", @event, Event.find(:all).collect {|p| [ p.city, p.city ] }) %>
+							
+							 <%= submit_tag 'List by city'%> 
+							 <% end %>
+							<div>
+								
+
+</div>
+<br/>
+							<br/>
+							<hr style="width:200px;"></hr>
+							<br/>
+							<br/>
+							<% if logged_in? -%>	
+	<% if current_user.role =="organizer" || current_user.role== "organizer-driver" -%>
+	
+<%= link_to 'New category', {:action => 'new'} ,{:class =>'boton'}%>
+
+	<%end -%>
+<%end -%>
+					
+					</div>

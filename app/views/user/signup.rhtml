@@ -1,0 +1,16 @@
+
+
+
+<h1><%=l(:register)%></h1>
+
+
+
+<% form_for :user, @user, :url => { :action => 'signup', :id => @user.id } do |f| %>
+
+  <%= render :partial => 'form', :locals => { :f => f } %>
+   <div class="form_row">  
+    <p><%= submit_tag l(:form, :signup) %></p>
+  </div>
+</fieldset>  
+<% end %>
+

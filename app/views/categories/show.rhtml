@@ -1,0 +1,19 @@
+<% for column in Category.content_columns %>
+<p>
+  <div id="name_category"><%=h @category.send(column.name) %></div>
+</p>
+<% end %>
+<br/>
+<br/>
+
+<%= link_to 'List all the events in this Category',{:controller => 'searches', :action => 'listing', :id =>@category},{:class =>'listing'}%>
+<% if logged_in? -%>	
+	<% if current_user.role =="organizer" || current_user.role== "organizer-driver" -%>
+	
+		<%= link_to 'Edit', :action => 'edit', :id => @category %> |
+		
+	<%end -%>
+<%end -%>
+	<br/>
+	<br/>
+<%= link_to 'Back', {:action => 'list'},{:class =>'boton_previous'}%>

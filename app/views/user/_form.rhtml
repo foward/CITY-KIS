@@ -1,0 +1,97 @@
+
+
+<fieldset>
+	<legend><%=l(:form,:enter)%></legend> 
+	<%= error_messages_for :user %>
+	</br>
+	<p><label for="login"><%=User.human_attribute_name(:login)%></label>
+	<%= f.text_field :login %></p>
+	
+	<p><label for="email"><%=User.human_attribute_name(:email)%></label>
+	<%= f.text_field :email %></p>
+	
+	<p><label for="password"><%=User.human_attribute_name(:password)%></label>
+	<%= f.password_field :password %></p>
+	
+	<p><label for="password_confirmation"><%=User.human_attribute_name(:password_confirmation)%></label>
+	<%= f.password_field :password_confirmation %></p>
+	
+
+<label for="name"><%=User.human_attribute_name(:name)%></label>
+<%= f.text_field :name %>
+
+<p><label for="lastname"><%=User.human_attribute_name(:lastname)%></label>
+<%= f.text_field :lastname %></p>
+
+<p><label for="birthday"><%=User.human_attribute_name(:birthday)%></label>
+ <%= calendariffic_input(false, 'birthday', 'calendariffic/date.png', 'start_cal', '%d/%m/%y', nil, {:class => 'user', :readonly => 'true'}, {:class => 'borderless'}) %>
+</p>
+
+      <p><label for="telephone"><%=User.human_attribute_name(:telephone)%></label>
+	  <%= f.text_field :area_code , :size => 3,
+                      :maxlength => 3%>
+<%= f.text_field :telephone %></p>
+
+	  <p><label for="address"><%=User.human_attribute_name(:address)%></label>
+<%= f.text_field :address %></p>
+
+	  <p><label for="postal_code"><%=User.human_attribute_name(:postal_code)%></label>
+<%= f.text_field :postal_code %></p>
+
+	  <p><label for="city"><%=User.human_attribute_name(:city)%></label>
+<%= f.text_field :city %></p>
+
+	  <p><label for="state"><%=User.human_attribute_name(:state)%></label>
+<%= f.text_field :state %></p>
+
+	  <p><label for="country"><%=User.human_attribute_name(:country)%></label>
+<%= f.country_select 'country', ["Austria","Italia","Slovenia"] %>
+</p>
+<hr />
+<h3><%=User.human_attribute_name(:city_kis_drivers)%></h3>
+
+<a href="#" onclick="Element.toggle('driver'); return false;">  Do you want to be Driver of events?</a>
+
+<div id="driver" style="display: none">
+	  <p><%=User.human_attribute_name(:do_you_want)%><br/><br/>
+	
+		<p><%=User.human_attribute_name(:yes)%> <%= check_box_tag('has_car',"1") %><%= hidden_field_tag ('has_car', "0") %></p>
+</div>
+		
+</p>
+<hr />
+<h3><%=User.human_attribute_name(:title_organizer)%></h3>
+
+	<a href="#" onclick="Element.toggle('organizer'); return false;">  Do you want to be Organizer of events?</a>
+	
+  <div id="organizer" style="display: none">
+  	
+	<p>
+	<label for="role"><%=User.human_attribute_name(:ask_organizer)%></label>
+			Yes <%= check_box_tag ('has_role',"1") %><%= hidden_field_tag ('has_role', "0") %></p>
+		<br/>
+		<p><label for="name_organizer"><%=User.human_attribute_name(:name_organizer)%></label>
+		<%= f.text_field :name_organizer %></p>
+		
+		<p><label for="organizer_data"><%=User.human_attribute_name(:ask_basic_data)%></label>
+		<%= check_box_tag 'organizer_data' %></p>
+		
+		<p><label for="telephone_organizer"><%=User.human_attribute_name(:telephone_organizer)%></label>
+		<%= f.text_field :area_code_organizer, :size => 3,
+		                      :maxlength => 3%>
+		<%= f.text_field :telephone_organizer %></p>
+		      
+			  <p><label for="address_organizer"><%=User.human_attribute_name(:address_organizer)%></label>
+		<%= f.text_field :address_organizer %></p>
+		
+			  <p><label for="postal_code_organizer"><%=User.human_attribute_name(:postal_code_organizer)%></label>
+		<%= f.text_field :postal_code_organizer %></p>
+		
+			  <p><label for="city_organizer"><%=User.human_attribute_name(:city_organizer)%></label>
+		<%= f.text_field :city_organizer %></p>
+		
+			  <p><label for="state_organizer"><%=User.human_attribute_name(:state_organizer)%></label>
+		<%= f.text_field :state_organizer %></p>
+
+
+	</div>

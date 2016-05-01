@@ -1,0 +1,46 @@
+<style type="text/css">
+<!--
+.Estilo1 {color: #FFFFFF}
+-->
+</style>
+
+<table width="100%" border="0" cellspacing="3" cellpadding="5">
+  <tr>
+    <td colspan="4" bgcolor="#336699"><div align="center"><span class="Estilo1">Your Profile </span></div>      <div align="center"><span class="Estilo1"><span class="Estilo1"></span></span></div></td>
+  </tr>
+  <tr valign="top">
+    <td width="12%"><div align="center"><img src="" alt="avatar" width="121" height="122" /></div></td>
+    <td width="7%"><p><strong>Name :</strong></p>
+    <p><strong>Login:<br />
+        <br />
+    Driver ? : </strong></p></td>
+    <td width="81%"><p><%= current_user.name %></p>
+    <p><%= current_user.login %></p>
+    <p><%= current_user.has_car %></p></td>
+  </tr>
+  <tr>
+  	
+	<td colspan="3"><%= link_to "Edit your Profile", {:id => current_user.id,:action => "edit",:controller => "user" },{:class=>'boton'}%></td>
+	
+	</tr>
+  <tr>
+    <td colspan="3" bgcolor="#336699"><div align="center" class="Estilo1">Lastest Events </div></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td colspan="2">&nbsp;</td>
+  </tr>
+  <tr bgcolor="#336699">
+    <td colspan="3"><div align="center" class="Estilo1">Your Events </div></td>
+  </tr>
+  <tr>
+    <td colspan="3">  
+	<%if current_user.im_organizer? -%>
+		<%= render :partial => 'list' %>
+	<%else-%>
+		You are not Organizer - Please Change your state in your profile
+	<%end -%>
+	
+	</td>
+  </tr>
+</table>

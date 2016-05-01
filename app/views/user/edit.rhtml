@@ -1,0 +1,11 @@
+<h1><%=l(:edit_user)%></h1>
+
+<% form_for :user, @user, :url => { :action => 'update', :id => @user.id } do |f| %>
+  <%= render :partial => 'form' , :locals => { :f => f }%>
+ <div class="form_row">  
+    <p><%= submit_tag l(:form, :edit) %></p>
+  </div>
+</fieldset>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @user %> 

@@ -1,0 +1,41 @@
+
+
+<table>
+    <tr>
+
+    <th><%= Event.human_attribute_name(:title)%></th>
+	<th><%= Event.human_attribute_name(:date_event)%></th>
+	<th><%= Event.human_attribute_name(:description)%></th>
+	<th><%= Event.human_attribute_name(:users_attending)%></th>
+	<th></th>
+	<th></th>
+	<th></th>
+  </tr>
+<% for event in @events %>
+
+
+  
+  <tr>
+
+    <td><%= truncate(event.title,30) %></td>
+	<td><%= event.date_event %></td>
+	<td><%= truncate(event.description,30) %></td>
+	<td><%= event.users_attending %></td>
+
+
+	
+    <td><%= link_to "Show",{:id => event, :action => "show",:controller => "events"} %></td>
+	<td><%= link_to "Edit",{:id => event, :action => "edit",:controller => "events"} %></td>
+	<td><%= link_to "Delete",{:id => event, :action => "destroy",:controller => "events"}, :confirm => 'Are you sure?', :method => :post %></td>
+
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @event_pages.current.previous } if @event_pages.current.previous %>
+<%= link_to 'Next page', { :page => @event_pages.current.next } if @event_pages.current.next %> 
+
+<br />
+
+	<%= link_to "New event", {:id =>nil,:action => "new",:controller => "events" },{:class=>'boton'}%>  
+

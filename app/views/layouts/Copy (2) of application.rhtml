@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html> 
+  <head> 
+    <title><%= @title %></title> 
+    <!--%= stylesheet_link_tag "site" %-->
+	<%= stylesheet_link_tag "style" %>
+    <%= stylesheet_link_tag "profile" %>
+    <%= stylesheet_link_tag 'calendariffic/calendar-win2k-cold-2.css' %>
+    <%= javascript_include_tag :defaults %> 
+    <%= javascript_include_tag 'calendariffic/calendar.js', 'calendariffic/calendar-setup.js', 'calendariffic/lang/calendar-en.js' %>
+    
+	<%= yield :head %>
+  </head>
+
+<body>
+	<div id="container">
+			<img src="../parts/logo.gif">
+		<div id="headcontainer">
+			<div id="menu">
+				<div id="nav"><a href="#" title="Home">HOME</a><a href="#" title="About">ABOUT</a><a href="#" title="Transfer">kis-TRANSFER</a><a href="#" title="Forum">FORUM</a>
+				
+			  <% if logged_in? -%>
+			 	<%= link_to "User", {:id => current_user.id,:action => "show",:controller => "user" }%>  |
+			  	<%= link_to "Profile", {:id => current_user.id,:action => "edit",:controller => "user" }%> |
+            	<%= nav_link "Logout", "user", "logout" %> 
+          <% else -%>
+            <%= nav_link "Register", "user", "signup" %> |
+            <%= nav_link "Login", "user", "login" %>
+          <% end -%>
+			
+				</div>
+			</div>
+		</div>
+		<div id="maincontainer">
+				<div id="content1">
+					
+					<div id="headc1">TOP EVENTS</div>
+					<div id="contc1">
+<img src="../parts/logo.gif" width="140">This is the Top Event Nr. 1. Please read the flyer and go there!!!<p>
+						<div class="divider"></div> 
+<p><img src="../parts/logo.gif" width="140">This is the Top Event Nr. 2. Please read the flyer and go there!!!
+					</div>
+				</div>
+				<div id="content2">
+					
+				<div id=contc2">
+				 <% if flash[:notice] -%> 
+		          <div id="notice"><%= flash[:notice] %></div> 
+		        <% end -%> 
+		        <%= yield %>
+		        <br clear="all" />
+				
+				</div>
+				</div>
+
+		</div>
+		<div id="footer">
+			<div id="footnavi"><a href="#nogo">AGB</a><a href="#nogo">IMPRESSUM</a><a href="#nogo">KONTAKT</a>
+			</div>
+		</div>
+	</div>
+		
+		<% if ENV["RAILS_ENV"] == "development" %>
+      <div id="debug">
+        <a href="#" onclick="Element.toggle('params_debug_info');return false">
+        params</a> |
+        <a href="#" onclick="Element.toggle('session_debug_info');return false">
+        session</a> |
+        <a href="#" onclick="Element.toggle('env_debug_info');return false">
+        env</a> |
+        <a href="#" onclick="Element.toggle('request_debug_info');return false">
+        request</a>
+        <fieldset id="params_debug_info" class="debug_info" style="display: none">
+          <legend>params</legend>
+          <%= debug(params) %>
+        </fieldset>
+        <fieldset id="session_debug_info" class="debug_info" style="display: none">
+          <legend>session</legend>
+          <%= debug(session) %>
+        </fieldset>
+        <fieldset id="env_debug_info" class="debug_info" style="display: none">
+          <legend>env</legend>
+          <%= debug(request.env) %>
+        </fieldset>
+        <fieldset id="request_debug_info" class="debug_info" style="display: none">
+          <legend>request</legend>
+          <%= debug(request) %>
+        </fieldset>
+      </div>
+    <% end %>
+			
+	
+</body>
+</html>

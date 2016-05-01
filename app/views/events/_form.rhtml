@@ -1,0 +1,89 @@
+<%= error_messages_for 'event' %>
+
+<!--[form:event]-->
+<fieldset>
+	<legend><%=l(:form,:event)%></legend> 
+	
+<p><label for="event_title">*<%=Event.human_attribute_name(:titless)%></label>
+<%= text_field :event, :title %></p>
+
+<p><label for="event_description">*<%=Event.human_attribute_name(:description)%></label>
+<%= text_area 'event', 'description'  %></p>
+
+<p>
+	<label for="event_photo_path"><%=Event.human_attribute_name(:upload_photo_path)%></label>
+	<b>If you dont have a picture we will put a default picture</b>
+	 <%= upload_column_field 'event', 'photo_path'  %>
+</p>
+
+<p><label for="event_price_before">*<%=Event.human_attribute_name(:price_before)%></label>
+<%= text_field 'event', 'price_before' , :size => 4,
+                      :maxlength => 3  %>€</p>
+<p><label for="event_price_after">*<%=Event.human_attribute_name(:price_after)%></label>
+<%= text_field 'event', 'price_after'   , :size => 4,
+                      :maxlength => 3%>€</p>
+<p><label for="event_price_special"><%=Event.human_attribute_name(:price_special)%></label>
+<%= text_field 'event', 'price_special' , :size => 4,
+                      :maxlength => 3%>€</p>
+
+<p><label for="event_address_event">*<%=Event.human_attribute_name(:address_event)%></label>
+<%= text_field_with_auto_complete 'event', 'address_event'  %></p>
+
+<p><label for="event_postal_code">*<%=Event.human_attribute_name(:postal_code)%></label>
+<%= text_field 'event', 'postal_code'  %></p>
+
+<p><label for="event_city">*<%=Event.human_attribute_name(:city)%></label>
+<%= text_field_with_auto_complete 'event', 'city'  %></p>
+
+<p><label for="event_country">*<%=Event.human_attribute_name(:country)%></label>
+<%= country_select 'event', 'country', ["Austria","Italy","Slovenia"] %>
+
+</p>
+
+<p><label for="event_time_event">*<%=Event.human_attribute_name(:time_event)%></label>
+<%= time_select 'event', 'time_event'  %></p>
+
+<p><label for="event_date_event">*<%=Event.human_attribute_name(:date_event)%></label>
+<%= date_select 'event', 'date_event'  %></p>
+
+<p><label for="event_homepage"><%=Event.human_attribute_name(:homepage)%></label>
+<%= text_field 'event', 'homepage'  %></p>
+
+<p><label for="event_tags">*<%=Event.human_attribute_name(:tags)%> -<span>space separated</span></label>
+<%= text_field_tag 'tags', @event.tag_list, :size => 40 %></p>
+
+<p><label for="event_forum_direction"><%=Event.human_attribute_name(:forum_direction)%></label>
+<p>You must to create a post in the respective forum <a href="http://city-kis.info/forum">here</a></p>
+<p>http://city-kis.info/forum/YaBB.pl?num=<%= text_field 'event', 'forum_direction'  %></p>
+
+<p><label for="category">*<%=Event.human_attribute_name(:choose_category)%></label>
+<%= select("event", "category_id", Category.find(:all).collect {|p| [ p.name, p.id ] }) %>
+<%= nav_link "Create a new one", "categories","new" %>
+
+</p>
+
+
+<p><label for="event_address_buy_tickets_1">*<%=Event.human_attribute_name(:address_buy_tickets_1)%></label>
+<%= text_field 'event', 'address_buy_tickets_1'  %></p>
+
+<p><label for="event_address_buy_tickets_2"><%=Event.human_attribute_name(:address_buy_tickets_2)%></label>
+<%= text_field 'event', 'address_buy_tickets_2'  %>
+
+</p>
+
+<%if logged_in? -%>
+	<%if current_user != nil-%>	
+		<%= hidden_field_tag ('user_id', current_user.id) %>
+	
+		<%if current_user.role == "admin"%>
+		<p><label for="event_event_top">Event top</label>
+		<select id="event_event_top" name="event[event_top]"><option value="false" selected>False</option><option value="true">True</option></select></p>
+	
+		<%end-%>
+	<%end-%>
+<%end-%>
+
+
+
+<!--[eoform:event]-->
+

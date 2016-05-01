@@ -1,0 +1,39 @@
+<h1>Listing categories</h1>
+
+<table>
+  <tr>
+  <% for column in Category.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for category in @categories %>
+  <tr>
+  <% for column in Category.content_columns %>
+    <td><%= image_tag("categorias.png")%></td>
+  <% end %>
+    <td><%= link_to " "+ category.send(column.name), :action => 'show', :id => category %></td>
+<% if logged_in? -%>	
+	<% if current_user.role =="admin" -%>
+    <td><%= link_to 'Edit', :action => 'edit', :id => category %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => category }, :confirm => 'Are you sure?', :method => :post %></td>
+	<%end -%>
+<%end -%>
+	<td></td>
+  </tr>
+<% end %>
+</table>
+<br/>
+<hr>
+<%= link_to 'Previous page', { :page => @category_pages.current.previous },{:class =>'boton_previous'} if @category_pages.current.previous %>
+<%= link_to 'Next page', { :page => @category_pages.current.next },{:class =>'boton_forward'} if @category_pages.current.next %> 
+
+<br/>
+
+<% if logged_in? -%>	
+	<% if current_user.role =="organizer" || current_user.role== "organizer-driver" -%>
+	
+<%= link_to 'New category', {:action => 'new'} ,{:class =>'boton'}%>
+
+	<%end -%>
+<%end -%>

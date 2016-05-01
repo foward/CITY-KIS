@@ -1,0 +1,11 @@
+<h1>New event</h1>
+
+<% upload_form_tag :action => 'create' do %>
+  <%= render :partial => 'form' %>
+   <p><%= submit_tag l(:form, :signup) %></p>
+  <fieldset>
+<% end %>
+
+<FORM>
+<INPUT type="button" value="Back" onClick="history.back()">
+</FORM>

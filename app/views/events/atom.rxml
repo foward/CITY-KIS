@@ -1,0 +1,23 @@
+xml.instruct!
+xml.feed "xmlns" => "http://www.w3.org/2005/Atom" do
+xml.title "City-kis events"
+xml.link "rel" => "self", "href" => events_url
+xml.link "rel" => "alternate", "href" => events_url
+xml.id events_url
+if @events.any?
+xml.updated @events.first.updated_at.strftime "%Y-%m-%dT%H:%M:%SZ"
+end
+xml.author { xml.name "City Kis Site" }
+@events.each do |events|
+xml.event do
+xml.title event.title
+xml.link "rel" => "alternate", "href" => event_url(event)
+xml.id event_url(event)
+xml.updated event.updated_at.strftime "%Y-%m-%dT%H:%M:%SZ"
+xml.author { xml.name event.user.name_organizer }
+xml.content "type" => "html" do
+xml.text! textilize(event.description)
+end
+end
+end
+end

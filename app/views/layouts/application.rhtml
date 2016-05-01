@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html> 
+  <head> 
+    <title><%= @title %></title> 
+    <!--%= stylesheet_link_tag "site" %-->
+	<%= stylesheet_link_tag "style" %>
+    <%= stylesheet_link_tag "profile" %>
+    <%= stylesheet_link_tag 'calendariffic/calendar-win2k-cold-2.css' %>
+    <%= javascript_include_tag :defaults %> 
+    <%= javascript_include_tag 'calendariffic/calendar.js', 'calendariffic/calendar-setup.js', 'calendariffic/lang/calendar-en.js' %>
+    
+	<%= yield :head %>
+  </head>
+
+<body>
+	<div id="wrapper">
+			
+		<div id="topcontainer">
+			<div id="logo"><%= image_tag ("logo.png")%></div>
+			<div id="banner"><%= image_tag ("banner468x60.gif")%></div>
+			<div id="login_menu">				
+					<% if logged_in? -%>
+					CONTROL PANEL
+					 	<%= link_to "User :"+current_user.login, {:id => current_user.id,:controller => "user" },{:class=>'boton'}%> 
+					  	
+            			<%= link_to "Logout", {:id => current_user.id,:action => "logout",:controller => "user" },{:class=>'smallfont'}%>
+		
+		          <% else -%>
+				  	<%= link_to "Register", {:id => current_user.id,:action => "signup",:controller => "user" },{:class=>'smallfont'}%>
+		           	<%= link_to "Login", {:id => current_user.id,:action => "login",:controller => "user" },{:class=>'smallfont'}%>
+		       
+		          <% end -%>
+			</div>
+		</div>
+		<div id="header">
+				<%= link_to "HOME", {:id => current_user.id,:action => "index",:controller => "site" },{:class=>'nav'}%>
+				<%= link_to "ABOUT", {:id => current_user.id,:action => "about",:controller => "site" },{:class=>'nav'}%>
+				<%= link_to "EVENTS", {:id => current_user.id,:action => "index",:controller => "events" },{:class=>'nav'}%>
+				<%= link_to "KIS-CONNECT", {:id => current_user.id,:action => "kisconnect",:controller => "site" },{:class=>'nav'}%>
+				<%= link_to "KIS-SHUTTLE", {:id => current_user.id,:action => "kisshuttle",:controller => "site" },{:class=>'nav'}%>
+				
+				<a class="nav" href="http://www.city-kis.info/forum/">FORUM</a>
+				
+		</div>
+	
+		<div id="maincontainer">
+				<div id="side-a">
+					<div class="top1">TOP EVENTS</div><br>
+						<a class="event" href=""><%= image_tag("ev1.jpg") %><br>
+							hallo hallo hallohallo hallo hallo hallo hallo hallo hallo hallo hallo hallohallohallo<br>
+							<b>weiterlesen...</b>
+						</a>
+					<hr ></hr>
+					<a class="event" href=""><img src="../../../public/images/parts/ev3.jpg"><br>
+					hallo hallo hallo hallo hallo hallo hallo hallo hallo hallo hallo hallo hallo<br>
+					<b>weiterlesen...</b>
+					</a><br>
+					<div class="top1">KIS - SITE</div>
+					<div class="event">Sie sind Veranstalter ohne eigener Webseite? Mit KIS-SITE eine eigene Seite gestalten.
+					</div>
+				</div>
+				
+				 
+				<div id="content-start">
+					<% if flash[:notice] -%> 
+				          <div id="notice"><%= flash[:notice] %></div> 
+				     <% end -%> 
+				        <%= yield %>
+
+				</div>
+				<div id="side-b">
+					
+					<div class="top2">neu im Forum</div>
+					<div class="box">
+						<a class="mehr" href="">von: alleschecka24<br>
+						jg ou uoiu ikhob ou puigb arewg asfg fdgadfhgq asdfafgg af<br>
+						<b>weiterlesen...</b></a>
+					</div>
+					
+					<div class="top2">neuester Event</div>
+					<div class="box">
+						<a class="mehr" href=""><img src="../../../public/images/parts/ev8.jpg"><br>Das ist der neueste Event. Mann, ist der neu! <br>
+						<b>weiterlesen...</b></a>
+					</div>
+					<div class="top2">Melden</div>
+					<div class="box">
+						<a class="mehr" href="">Event</a>
+					</div>
+					<div class="box">
+						<a class="mehr" href="">Mitfahrgelegenheit</a>
+					</div>
+					<div id="banner-b">
+						<img src="../../../public/images/parts/lexus.gif">
+					</div>
+				
+				</div>
+		</div>
+		<div id="footer">
+	<br/>
+			<br/>
+			<hr style="width:100%">
+			
+			<%= link_to "AGB", {:action => "agb",:controller => "site" }%>
+			<%= link_to "IMPRESSUM", {:action => "impressum",:controller => "site" }%>
+			<%= link_to "KONTAKT", {:action => "contact",:controller => "site" }%>
+		</div>
+	</div>
+	
+	<% if ENV["RAILS_ENV"] == "development" %>
+      <div id="debug">
+        <a href="#" onclick="Element.toggle('params_debug_info');return false">
+        params</a> |
+        <a href="#" onclick="Element.toggle('session_debug_info');return false">
+        session</a> |
+        <a href="#" onclick="Element.toggle('env_debug_info');return false">
+        env</a> |
+        <a href="#" onclick="Element.toggle('request_debug_info');return false">
+        request</a>
+        <fieldset id="params_debug_info" class="debug_info" style="display: none">
+          <legend>params</legend>
+          <%= debug(params) %>
+        </fieldset>
+        <fieldset id="session_debug_info" class="debug_info" style="display: none">
+          <legend>session</legend>
+          <%= debug(session) %>
+        </fieldset>
+        <fieldset id="env_debug_info" class="debug_info" style="display: none">
+          <legend>env</legend>
+          <%= debug(request.env) %>
+        </fieldset>
+        <fieldset id="request_debug_info" class="debug_info" style="display: none">
+          <legend>request</legend>
+          <%= debug(request) %>
+        </fieldset>
+      </div>
+    <% end %>
+			
+		
+			
+	
+</body>
+</html>

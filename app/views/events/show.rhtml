@@ -1,0 +1,136 @@
+
+
+<div id="liste">
+<table width="508" border="0" cellspacing="3" cellpadding="5">
+  <tr>
+    <td colspan="4" bgcolor="#336699"><span class="title_event"><%= @event.title  %></span></td>
+  </tr>
+  <tr valign="top">
+    <td colspan="2" rowspan="8" width="100%">	
+	<% if @event.photo_path == nil -%>
+		<img src="/images/event-default.png" width="320" height="257" alt="Photo" longdesc="photo default" />
+
+	<%else-%>
+		<%= image_tag (@event.photo_path.url, :size => "360x297", :alt => "Photo Event") %>
+	<%end-%>
+	
+	</td>
+    <td><strong><%=Event.human_attribute_name(:address_event)%></strong></td>
+    <td ></td>
+  </tr>
+  <tr>
+    <td colspan="2"><%= @event.address_event %>, <%= @event.city  %> ,<%= @event.postal_code  %>,<%= @event.country %></td>
+  
+  </tr>
+  <tr>
+    <td><strong></strong></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Google Maps</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="29"><strong><%=Event.human_attribute_name(:price_after)%></strong></td>
+    <td><%= @event.price_after %> €</td>
+  </tr>
+  <tr>
+    <td valign="top"><strong><%=Event.human_attribute_name(:price_before)%></strong></td>
+    <td valign="top"><%= @event.price_before %> €</td>
+  </tr>
+  <tr>
+    <td height="108" valign="top"><strong><%=Event.human_attribute_name(:price_special)%></strong></td>
+    <td valign="top"><%= @event.price_special %> €</td>
+  </tr>
+  <tr>
+    <td width="108"><strong><%=Event.human_attribute_name(:submited_by)%></strong></td>
+    <td width="250"><%= @event.user.name_organizer %></td>
+	
+    <td><strong><%=Event.human_attribute_name(:category)%></strong></td>
+    <td><%= @event.category.name %></td>
+  </tr>
+  <tr>
+    <td><%=Event.human_attribute_name(:time_event)%></td>
+    <td><%= @event.time_event  %></td>
+    <td><strong><%=Event.human_attribute_name(:tags)%></strong></td>
+    <td><%= @event.tag_list  %></td>
+  </tr>
+  
+   <tr>
+    <td><strong><%=Event.human_attribute_name(:date_event)%></strong></td>
+    <td><%= @event.date_event  %></td>
+    <td><strong><%=Event.human_attribute_name(:homepage)%></strong></td>
+    <td><a href='<%= @event.homepage  %>'><%= @event.homepage  %></a></td>
+  </tr>
+  
+  <tr>
+    <td></td>
+    <td></td>
+    <td><%=Event.human_attribute_name(:forum_direction)%></td>
+    <td><a href='http://city-kis.info/forum/YaBB.pl?num=<%= @event.forum_direction  %>'><%= @event.title  %></a></td>
+  </tr>
+  <tr>
+  	 <td><input name="Submit" type="submit" class="Estilo1" value="I want to go!" /></td>
+    <td align="left"><strong>Assistents : </strong><%= @event.users_attending %></td>
+
+    <td colspan="2">&nbsp;</td>
+  </tr>
+  
+   <tr>
+    <td>&nbsp;</td>
+    <td></td>
+    <td colspan="2">&nbsp;</td>
+  </tr>
+  
+  <tr>
+    <td>&nbsp;</td>
+    <td align="right"><strong><%=Event.human_attribute_name(:address_buy_tickets)%></strong></td>
+    <td colspan="2"><%= @event.address_buy_tickets_1  %></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><strong>&nbsp;</strong></td>
+    <td colspan="2"><%= @event.address_buy_tickets_2 %></td>
+  </tr>
+  <tr>
+    <td colspan="4" bgcolor="#336699"><span class="title_event_small"><%=Event.human_attribute_name(:description)%></span></td>
+  </tr>
+  <tr>
+    <td colspan="4"><%= @event.description %></td>
+  </tr>
+  <tr>
+    <td colspan="4">&nbsp;</td>
+  </tr>
+  
+  <tr>
+    <td colspan="2"><strong>Comments</strong></td>
+    <td colspan="2">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2">
+    <%if logged_in? -%>
+		<%if current_user.role == "admin"%>
+		<p>Event top <%= @event.event_top%> </p>
+
+	<%end-%>
+<%end-%>
+</td>
+    <td colspan="2">&nbsp;</td>
+  </tr>
+</table>
+</div>
+    <%if logged_in? -%>
+		<%if current_user.role == "organizer" || current_user.role == "organizer-driver" -%>
+			<%if current_user.id == @event.user_id -%>
+				<%= link_to 'Edit',{ :action => 'edit', :id => @event},{:class =>'boton'}  %> 
+			<%end -%>
+				
+		<%end-%>
+	<%end-%>
+<FORM>
+<INPUT type="button" value="Back" onClick="history.back()">
+</FORM>
+

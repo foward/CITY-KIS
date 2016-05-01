@@ -1,0 +1,23 @@
+xml.instruct!
+
+  xml.rss "version" => "2.0", "xmlns:dc" => "http://purl.org/dc/elements/1.1/" do
+  
+  xml.channel do
+      xml.title "News Feed "
+      xml.link event_url
+      xml.pubDate CGI.rfc1123_date @articles.first.published_at if @articles.any?
+      xml.description "Events in City-kis"
+    
+            @articles.each do |event|
+              xml.item do
+              xml.title event.title
+              xml.link event_url(event)
+              xml.description event.description
+              xml.pubDate CGI.rfc1123_date event.date_event
+              xml.guid event_url(event)
+              xml.author "#{event.user.name_organizer} (#{event.user.login})"
+              end
+            
+            end
+    end
+end

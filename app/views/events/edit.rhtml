@@ -1,0 +1,11 @@
+<h1>Editing event</h1>
+
+<% form_tag :action => 'update', :id => @event do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit'%> <%= link_to 'Show', {:action => 'show', :id => @event},{:class =>'boton'} %> 
+<% end %>
+<br>
+<FORM>
+<INPUT type="button" value="Back" onClick="history.back()">
+</FORM>
+
